@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 40px;
+  background-color: #ddd;
+}
+
+.btn {
+  @apply bg-orange-600
+  px-3 mt-2 py-2
+  inline-block
+  text-white
+  rounded-md
+  border-2
+  border-amber-600
+  hover:bg-orange-500;
+}
+
+/* .btn:hover {
+  background-color: orange;
+} */
