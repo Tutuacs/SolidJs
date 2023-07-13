@@ -3,12 +3,22 @@ import banner from "./assets/banner.png";
 import { A, Route, Routes } from "@solidjs/router";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
+import Product from "./pages/Product";
+import { useCartContext } from "./context/CartContext";
 
 function App() {
   const [darkTheme, setDarkTheme] = createSignal(false);
 
   function toggleTheme() {
     setDarkTheme(!darkTheme());
+  }
+
+  const {items} = useCartContext()
+
+  const quantity = () => {
+    return items.reduce((acc, current) => {
+      return acc + current.quantity
+    }, 0)
   }
 
   return (
@@ -22,14 +32,15 @@ function App() {
         </span>
         <h1>Ninja Merch</h1>
         <A href="/">Home</A>
-        <A href="/Cart">Cart</A>
+        <A href="/Cart">Cart({quantity()})</A>
       </header>
 
       <img class="rounded-lg w-screen" src={banner} alt="" />
 
       <Routes>
         <Route path={"/"} component={Home}></Route>
-        <Route path={"/Cart"} component={Cart}></Route>
+        <Route path={"/cart"} component={Cart}></Route>
+        <Route path={"/product/:id"} component={Product}></Route>
       </Routes>
     </main>
   );
